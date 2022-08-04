@@ -1,4 +1,5 @@
 from abc import ABC
+import codecs
 
 
 class Encrypt(ABC):
@@ -12,17 +13,22 @@ class Encrypt(ABC):
         options.get(mode)()
 
     def rot13(self):
+        print("\n")
         print('Selected ROT13!')
+        print("\n")
         print('Currently encrypting', self.buffer.get_buffer())
-        alphabet = "abcdefghijklmnopqrstuvwxyz"
-        encrypted_text = "".join([alphabet[(alphabet.find(char) + 13) % 26] for char in self.buffer.get_buffer()])
+        print("\n")
+        encrypted_text = codecs.encode(self.buffer.get_buffer(), 'rot_13')
         self.buffer.set_buffer(encrypted_text)
         print('Encrypted successfully!')
         print('Encrypted text:', encrypted_text)
 
     def rot47(self):
+        print("\n")
         print('Selected ROT47!')
+        print("\n")
         print('Currently encrypting', self.buffer.get_buffer())
+        print("\n")
         x = []
         for i in range(len(self.buffer.get_buffer())):
             j = ord(self.buffer.get_buffer()[i])
