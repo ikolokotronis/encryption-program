@@ -2,8 +2,8 @@ from abc import ABC
 
 
 class Encrypt(ABC):
-    def __init__(self, text, mode):
-        self.text = text
+    def __init__(self, buffer, mode):
+        self.buffer = buffer
         self.mode = mode
         self.run(mode)
 
@@ -12,7 +12,7 @@ class Encrypt(ABC):
         options.get(mode)()
 
     def rot13(self):
-        print('selected rot13! text:', self.text)
+        print('Selected ROT13! Current text:', self.buffer.get_buffer())
 
     def rot47(self):
-        print('selected rot47! text:', self.text)
+        print('Selected ROT47! Current text:', self.buffer.get_buffer())
