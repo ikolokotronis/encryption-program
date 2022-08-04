@@ -8,11 +8,11 @@ class Encrypt(ABC):
         self.run(mode)
 
     def run(self, mode):
-        options = {'rot13': self.rot13, 'rot47': self.rot47}
+        options = {'1': self.rot13, '2': self.rot47}
         options.get(mode)()
 
     def rot13(self):
-        print('selected rot13! text: ', self.text)
+        print('selected rot13! text:', self.text)
 
     def rot47(self):
-        print('selected rot47!')
+        print('selected rot47! text:', self.text)
