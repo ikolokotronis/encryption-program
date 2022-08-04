@@ -37,5 +37,6 @@ class Encrypt(ABC):
             else:
                 x.append(self.buffer.get_buffer()[i])
         encrypted_text = ''.join(x)
+        self.buffer.set_buffer(encrypted_text)
         print('Encrypted successfully!')
         print('Encrypted text:', encrypted_text)
