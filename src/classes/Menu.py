@@ -27,25 +27,6 @@ class Menu:
                 continue
             self.__run_factory(choice)
 
-    def __save_to_file(self, file, text):
-        with open(file, 'w') as f:
-            f.write(text)
-        print("Saved to file successfully")
-        print("Buffer cleared")
-        return text
-
-    def __peek_buffer(self):
-        print(f'Current buffer: {self.buffer.get_buffer()}')
-        print("\n")
-        return self.buffer.get_buffer()
-
-    def __run_factory(self, choice):
-        text = self.get_input_text()
-        self.buffer.set_buffer(text)
-        buffer = self.buffer
-        mode = self.get_mode()
-        return self.factory(choice, buffer, mode)
-
     def print_menu(self):
         print("\n")
         print("1. Encrypt")
@@ -78,8 +59,17 @@ class Menu:
         print("\n")
         return input_file
 
-    def factory(self, choice, buffer, mode):
-        return self.menu.get(choice)(buffer, mode)  # returns object
+    def __save_to_file(self, file, text):
+        with open(file, 'w') as f:
+            f.write(text)
+        print("Saved to file successfully")
+        print("Buffer cleared")
+        return text
+
+    def __peek_buffer(self):
+        print(f'Current buffer: {self.buffer.get_buffer()}')
+        print("\n")
+        return self.buffer.get_buffer()
 
     def __save_buffer_to_file(self):
         file = self.get_file()
@@ -90,6 +80,16 @@ class Menu:
         print("Saved to file successfully")
         print("Buffer cleared")
         return text
+
+    def __factory(self, choice, buffer, mode):
+        return self.menu.get(choice)(buffer, mode)  # returns object
+
+    def __run_factory(self, choice):
+        text = self.get_input_text()
+        self.buffer.set_buffer(text)
+        buffer = self.buffer
+        mode = self.get_mode()
+        return self.__factory(choice, buffer, mode)
 
 
 if __name__ == "__main__":
