@@ -1,5 +1,6 @@
 from Encrypt import Encrypt
 from Buffer import Buffer
+from Decrypt import Decrypt
 
 
 class Menu:
@@ -7,7 +8,7 @@ class Menu:
         self.buffer = Buffer('')
         self.menu = {
             "1": Encrypt,
-            "2": "Decrypt",
+            "2": Decrypt,
             "3": "Peek buffer",
             "4": "Save to file",
             "5": "Exit"
@@ -26,6 +27,7 @@ class Menu:
                 self.__peek_buffer()
                 continue
             self.__run_factory(choice)
+        print('Exiting...')
 
     def print_menu(self):
         print("\n")
@@ -82,7 +84,7 @@ class Menu:
         return text
 
     def __factory(self, choice, buffer, mode):
-        return self.menu.get(choice)(buffer, mode)  # returns object
+        return self.menu.get(choice)(buffer, mode)
 
     def __run_factory(self, choice):
         text = self.get_input_text()
