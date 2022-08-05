@@ -2,7 +2,7 @@ def rot47_encoder(buffer):
     x = []
     for i in range(len(buffer)):
         j = ord(buffer[i])
-        if j >= 33 and j <= 126:
+        if 33 <= j <= 126:
             x.append(chr(33 + ((j + 14) % 94)))
         else:
             x.append(buffer[i])

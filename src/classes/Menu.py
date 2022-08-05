@@ -61,13 +61,6 @@ class Menu:
         print("\n")
         return input_file
 
-    def __save_to_file(self, file, text):
-        with open(file, 'w') as f:
-            f.write(text)
-        print("Saved to file successfully")
-        print("Buffer cleared")
-        return text
-
     def __peek_buffer(self):
         print(f'Current buffer: {self.buffer.get_buffer()}')
         print("\n")
