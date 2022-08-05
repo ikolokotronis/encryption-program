@@ -19,10 +19,10 @@ class Menu:
             choice = self.get_choice()
             if choice == "5":
                 break
-            if choice == "4":
+            elif choice == "4":
                 self.__save_buffer_to_file()
                 continue
-            if choice == "3":
+            elif choice == "3":
                 self.__peek_buffer()
                 continue
             self.__run_factory(choice)
