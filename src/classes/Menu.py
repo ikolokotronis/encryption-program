@@ -29,7 +29,8 @@ class Menu:
                 print(f'Current buffer: {self.buffer.get_buffer()}')
                 print("\n")
                 continue
-            self.get_input_text()
+            text = self.get_input_text()
+            self.buffer.set_buffer(text)
             mode = self.get_mode()
             self.factory(choice, self.buffer, mode)
 
@@ -58,7 +59,6 @@ class Menu:
     def get_input_text(self):
         input_text = input("Enter your text: ")
         print("\n")
-        self.buffer.set_buffer(input_text)
         return input_text
 
     def get_file(self):
@@ -72,6 +72,8 @@ class Menu:
     def save_to_file(self, file, text):
         with open(file, 'w') as f:
             f.write(text)
+        print("Saved to file successfully")
+        print("Buffer cleared")
         return text
 
 
