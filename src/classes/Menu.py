@@ -8,7 +8,7 @@ class Menu:
         self.menu = {
             "1": Encrypt,
             "2": "Decrypt",
-            "3": self.buffer.get_buffer(),
+            "3": "Peek buffer",
             "4": "Save to file",
             "5": "Exit"
         }
@@ -20,19 +20,31 @@ class Menu:
             if choice == "5":
                 break
             if choice == "4":
-                file = self.get_file()
-                text = self.buffer.get_buffer()
-                self.save_to_file(file, text)
-                self.buffer.set_buffer('')
+                self.__save_buffer_to_file()
                 continue
             if choice == "3":
-                print(f'Current buffer: {self.buffer.get_buffer()}')
-                print("\n")
+                self.__peek_buffer()
                 continue
-            text = self.get_input_text()
-            self.buffer.set_buffer(text)
-            mode = self.get_mode()
-            self.factory(choice, self.buffer, mode)
+            self.__run_factory(choice)
+
+    def __save_to_file(self, file, text):
+        with open(file, 'w') as f:
+            f.write(text)
+        print("Saved to file successfully")
+        print("Buffer cleared")
+        return text
+
+    def __peek_buffer(self):
+        print(f'Current buffer: {self.buffer.get_buffer()}')
+        print("\n")
+        return self.buffer.get_buffer()
+
+    def __run_factory(self, choice):
+        text = self.get_input_text()
+        self.buffer.set_buffer(text)
+        buffer = self.buffer
+        mode = self.get_mode()
+        return self.factory(choice, buffer, mode)
 
     def print_menu(self):
         print("\n")
@@ -66,12 +78,15 @@ class Menu:
         print("\n")
         return input_file
 
-    def factory(self, choice, text, mode):
-        return self.menu.get(choice)(text, mode)  # returns object
+    def factory(self, choice, buffer, mode):
+        return self.menu.get(choice)(buffer, mode)  # returns object
 
-    def save_to_file(self, file, text):
+    def __save_buffer_to_file(self):
+        file = self.get_file()
+        text = self.buffer.get_buffer()
         with open(file, 'w') as f:
             f.write(text)
+        self.buffer.set_buffer('')
         print("Saved to file successfully")
         print("Buffer cleared")
         return text

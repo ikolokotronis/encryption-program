@@ -1,6 +1,6 @@
 from abc import ABC
 import codecs
-from ..utils.rot47_encoder import rot47_encoder
+from src.utils.rot47_encoder import rot47_encoder
 
 
 class Encrypt(ABC):
@@ -14,6 +14,7 @@ class Encrypt(ABC):
         options.get(mode)()
 
     def rot13(self):
+        print(self.buffer)
         print("\n")
         print('Selected ROT13!')
         print("\n")

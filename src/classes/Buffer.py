@@ -9,3 +9,4 @@ class Buffer:
 
     def set_buffer(self, text):
         self.buffer = text
+        return self.buffer
