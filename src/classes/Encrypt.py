@@ -1,5 +1,6 @@
 from abc import ABC
 import codecs
+from ..utils.rot47_encoder import rot47_encoder
 
 
 class Encrypt(ABC):
@@ -29,14 +30,7 @@ class Encrypt(ABC):
         print("\n")
         print('Currently encrypting', self.buffer.get_buffer())
         print("\n")
-        x = []
-        for i in range(len(self.buffer.get_buffer())):
-            j = ord(self.buffer.get_buffer()[i])
-            if j >= 33 and j <= 126:
-                x.append(chr(33 + ((j + 14) % 94)))
-            else:
-                x.append(self.buffer.get_buffer()[i])
-        encrypted_text = ''.join(x)
+        encrypted_text = rot47_encoder(self.buffer.get_buffer())
         self.buffer.set_buffer(encrypted_text)
         print('Encrypted successfully!')
         print('Encrypted text:', encrypted_text)
