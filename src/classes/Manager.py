@@ -37,7 +37,15 @@ class Manager:
         self.buffer.set_buffer(encrypted_text)
 
     def __decrypt(self):
-        pass
+        self.rot_menu.show_options()
+        rot_choice = self.rot_menu.get_choice()
+        rot = RotFactory.produce(rot_choice)
+        file_name = self.get_file_name()
+        encrypted_text = ''
+        with open(file_name, 'r') as f:
+            encrypted_text = f.read()
+        decrypted_text = rot.decrypt(encrypted_text)
+        self.buffer.set_buffer(decrypted_text)
 
     def __peek_buffer(self):
         print(f'Current buffer: {self.buffer.get_buffer()}')
@@ -45,11 +53,15 @@ class Manager:
         return self.buffer.get_buffer()
 
     def __save_buffer_to_file(self):
-        file = self.get_file()
+        file_name = self.get_file_name()
         text = self.buffer.get_buffer()
-        with open(file, 'w') as f:
+        with open(file_name, 'w') as f:
             f.write(text)
         self.buffer.set_buffer('')
         print("Saved to file successfully")
         print("Buffer cleared")
         return text
+
+    def get_file_name(self):
+        file_name = input('Enter file name: ')
+        return file_name

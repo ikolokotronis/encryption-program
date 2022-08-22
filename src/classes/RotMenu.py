@@ -4,7 +4,7 @@ class RotMenu:
 
     def show_options(self):
         for i, option in enumerate(self.options):
-            print(f'{i}. {option}')
+            print(f'{i+1}. {option}')
 
     def get_choice(self):
         choice = input("Enter your choice: ")
