@@ -1,17 +1,17 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import codecs
 from src.utils.rot47_encoder import rot47_encoder
 
 
-class Encrypt(ABC):
-    def __init__(self, buffer, mode):
-        self.buffer = buffer
-        self.mode = mode
-        self.run(mode)
+class Rot(ABC):
 
-    def run(self, mode):
-        options = {'1': self.rot13, '2': self.rot47}
-        options.get(mode)()
+    @abstractmethod
+    def encrypt(self, plain_text):
+        raise NotImplementedError
+
+    @abstractmethod
+    def decrypt(self, encrypted_text):
+        raise NotImplementedError
 
     def rot13(self):
         print(self.buffer)
