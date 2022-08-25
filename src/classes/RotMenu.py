@@ -1,10 +1,10 @@
 class RotMenu:
     def __init__(self):
-        self.options = ['ROT13', 'ROT47']
+        self.options = ["ROT13", "ROT47"]
 
     def show_options(self):
         for i, option in enumerate(self.options):
-            print(f'{i+1}. {option}')
+            print(f"{i+1}. {option}")
 
     def get_choice(self):
         choice = input("Enter your choice: ")

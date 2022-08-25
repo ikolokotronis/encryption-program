@@ -4,12 +4,8 @@ from src.utils.ROT47 import ROT47
 
 
 class RotFactory:
-    MODES = {
-        '1': ROT13,
-        '2': ROT47
-    }
+    MODES = {"1": ROT13, "2": ROT47}
 
     @staticmethod
     def produce(choice):
-        print(choice)
         return RotFactory.MODES.get(choice, Messenger.no_such_option)()

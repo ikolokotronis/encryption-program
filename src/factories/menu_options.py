@@ -1,2 +1,1 @@
-MENU_OPTIONS = ['Encrypt', 'Decrypt',
-                'Peek buffer', 'Save to file', 'Exit']
+MENU_OPTIONS = ["Encrypt", "Decrypt", "Peek buffer", "Save to file", "Exit"]
