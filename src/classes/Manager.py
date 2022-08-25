@@ -1,6 +1,8 @@
 from src.classes.Buffer import Buffer
 from src.classes.Menu import Menu
+from src.classes.Messenger import Messenger
 from src.classes.RotMenu import RotMenu
+from src.exceptions.InvalidChoice import InvalidChoice
 from src.factories.RotFactory import RotFactory
 
 
@@ -31,15 +33,20 @@ class Manager:
             self.__execute(choice)
 
     def __execute(self, choice):
-        self.menu_options.get(choice, self.__show_error)()
-
-    def __show_error(self): # to Messaging - as static method
-        print('No such option!')
+        try:
+            self.menu_options.get(choice, Messenger.no_such_option)()
+        except InvalidChoice:
+            print('No such option!')
 
     def __encrypt(self):
         self.rot_menu.show_options()
         rot_choice = self.rot_menu.get_choice()
-        rot = RotFactory.produce(rot_choice)
+        rot = ''
+        try:
+            rot = RotFactory.produce(rot_choice)
+        except InvalidChoice:
+            print('No such option!')
+            return
         plain_text = self.rot_menu.get_plain_text()
         encrypted_text = rot.encrypt(plain_text)
         self.buffer.set_buffer(encrypted_text)
