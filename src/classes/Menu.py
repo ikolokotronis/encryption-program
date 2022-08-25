@@ -10,11 +10,13 @@ class Menu:
             print(f"{i+1}. {option}")
 
     def get_choice(self):
+        print("\n")
         choice = input("Enter your choice: ")
         print("\n")
         return choice
 
     def get_file(self):
+        print("\n")
         input_file = input("Enter file name: ")
         print("\n")
         return input_file
