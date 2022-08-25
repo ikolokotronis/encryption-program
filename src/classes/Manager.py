@@ -66,7 +66,7 @@ class Manager:
         print("\n")
         return self.buffer.get_buffer()
 
-    #  TODO: wydziel filehandler jako klase
+    # TODO: filehandler class
     def __save_buffer_to_file(self):
         file_name = self.get_file_name()
         text = self.buffer.get_buffer()
