@@ -1,9 +1,10 @@
-from src.classes.Buffer import Buffer
-from src.classes.Menu import Menu
-from src.classes.Messenger import Messenger
-from src.classes.RotMenu import RotMenu
-from src.exceptions.InvalidChoice import InvalidChoice
-from src.factories.RotFactory import RotFactory
+from src.classes.buffer import Buffer
+from src.classes.file_handler import FileHandler
+from src.classes.menu import Menu
+from src.classes.messenger import Messenger
+from src.classes.rot_menu import RotMenu
+from src.exceptions.invalid_choice import InvalidChoice
+from src.factories.rot_factory import RotFactory
 
 
 class Manager:
@@ -14,11 +15,12 @@ class Manager:
         self.buffer = Buffer("")
         self.menu = Menu()
         self.rot_menu = RotMenu()
+        self.file_handler = FileHandler(buffer=self.buffer)
         self.menu_options = {
             "1": self.__encrypt,
             "2": self.__decrypt,
             "3": self.__peek_buffer,
-            "4": self.__save_buffer_to_file,
+            "4": self.file_handler.save_buffer_to_file,
             "5": self.__exit,
         }
 
@@ -54,7 +56,7 @@ class Manager:
         self.rot_menu.show_options()
         rot_choice = self.rot_menu.get_choice()
         rot = RotFactory.produce(rot_choice)
-        file_name = self.get_file_name()
+        file_name = self.file_handler.get_file_name()
         encrypted_text = ""
         with open("content/" + file_name, "r", encoding="utf-8") as f:
             encrypted_text = f.read()
@@ -66,17 +68,17 @@ class Manager:
         print("\n")
         return self.buffer.get_buffer()
 
-    # TODO: filehandler class
-    def __save_buffer_to_file(self):
-        file_name = self.get_file_name()
-        text = self.buffer.get_buffer()
-        with open("content/" + file_name, "w") as f:
-            f.write(text)
-        self.buffer.set_buffer("")
-        print("Saved to file successfully")
-        print("Buffer cleared")
-        return text
-
-    def get_file_name(self):
-        file_name = input("Enter file name: ")
-        return file_name
+    # # TODO: filehandler class
+    # def __save_buffer_to_file(self):
+    #     file_name = self.get_file_name()
+    #     text = self.buffer.get_buffer()
+    #     with open("content/" + file_name, "w") as f:
+    #         f.write(text)
+    #     self.buffer.set_buffer("")
+    #     print("Saved to file successfully")
+    #     print("Buffer cleared")
+    #     return text
+    #
+    # def get_file_name(self):
+    #     file_name = input("Enter file name: ")
+    #     return file_name

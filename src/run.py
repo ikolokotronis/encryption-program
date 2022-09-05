@@ -1,4 +1,4 @@
-from src.classes.Manager import Manager
+from src.classes.manager import Manager
 
 
 def main():

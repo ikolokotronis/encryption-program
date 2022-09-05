@@ -1,4 +1,4 @@
-from src.utils.Rot import Rot
+from src.utils.rot import Rot
 
 
 class ROT47(Rot):

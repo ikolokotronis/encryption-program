@@ -1,2 +1,0 @@
-class InvalidChoice(Exception):
-    pass
